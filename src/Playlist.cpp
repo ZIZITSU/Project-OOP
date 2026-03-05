@@ -6,65 +6,56 @@ using namespace std;
 
 int Playlist::currentPlaylistID = 1;
 
-Playlist::Playlist(): playlistName_("Uninitialized"){
+Playlist::Playlist(const SongLibrary& library): playlistName_("Uninitialized"), library_(&library) {
     playlistID_ = currentPlaylistID++;
+    
 }
 
-Playlist::Playlist(string name){
-    playlistName_ = name;
+Playlist::Playlist(const SongLibrary& library, string name): playlistName_(name), library_(&library){
     playlistID_ = currentPlaylistID++;
 }
 
 Playlist::~Playlist(){cout << "Playlist \"" << playlistName_ << "\" Deleted." << endl;}
 
-void Playlist::addSong(const int songID){
-    songIDs_.push_back(songID);
+void Playlist::addSong(const Song& song){
+    Song* temp = library_->getSong(song.id());
+    songs_.push_back(temp);
 }
 
-void Playlist::removeSong(const int songID){
-    for(auto it = songIDs_.begin(); it != songIDs_.end(); ++it){
-        if(*it == songID){
-            songIDs_.erase(it);
-            break;
+void Playlist::removeSong(const Song& song){
+    for(auto temp = songs_.begin(); temp != songs_.end(); ++temp){
+        if((*temp)->id() == song.id()){
+            songs_.erase(temp);
         }
     }
 }
 
 void Playlist::moveSong(const int moveFromIndex, const int moveToIndex){
-        int playlistSize = songIDs_.size();
-        if(moveFromIndex < 0 || moveFromIndex > playlistSize){
-            cout << "Error: Invalid Index.";
-            return;
-        }
-        if(moveToIndex < 0 || moveToIndex > playlistSize){
-            cout << "Error: Invalid Index.";
-            return;
-        }
-        int id = songIDs_[moveFromIndex];
-        songIDs_.erase(songIDs_.begin() + moveFromIndex);
-        songIDs_.insert(songIDs_.begin() + moveToIndex, id);
+    int playlistSize = songs_.size();
+    if(moveFromIndex < 0 || moveFromIndex > playlistSize){
+        cout << "Error: Invalid Index.";
+        return;
+    }
+    if(moveToIndex < 0 || moveToIndex > playlistSize){
+        cout << "Error: Invalid Index.";
+        return;
+    }
+    Song* temp = songs_[moveFromIndex];
+    songs_.erase(songs_.begin() + moveFromIndex);
+    songs_.insert(songs_.begin() + moveToIndex, temp);
 }
 
-int Playlist::getTotalDuration(const SongLibrary& library) const{
+int Playlist::getTotalPlaylistDuration() const{
     int totalDuration = 0;
-    for(int i=0;i<songIDs_.size();i++){
-        const Song* song = library.getSong(songIDs_[i]);
-        totalDuration += song->duration();
+    for(int i=0;i<songs_.size();i++){
+        totalDuration += songs_[i]->duration();
     }
     return totalDuration;
 }
 
-const Song* Playlist::getSong(int index, const SongLibrary& library) const{
-    if (index < 0 || index >= songIDs_.size()){
-        cout << "Error: Index out of range.";
-        return nullptr;
-    }
-    return library.getSong(songIDs_[index]);
-}
-
-void Playlist::listAllSongs(const SongLibrary& library) const{
-    for(int i=0;i<songIDs_.size();i++){
-        const Song* song = getSong(i, library);
+void Playlist::listAllPlaylistSongs() const{
+    for(int i=0;i<songs_.size();i++){
+        const Song* song = songs_[i];
         cout << "\"" << song->title() << "\" by " << song->artist()
         << " ,Duration: " << song->duration() << endl;
     }
