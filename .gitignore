@@ -8,6 +8,7 @@ cmake-build-*/
 # Qt / CMake generated
 CMakeFiles/
 CMakeCache.txt
+CMakeLists.txt
 cmake_install.cmake
 Makefile
 *.user
