@@ -4,9 +4,16 @@
 #include<iostream>
 using namespace std;
 
-Playlist::Playlist(): playlistName_("Uninitialized") {}
+int Playlist::currentPlaylistID = 1;
 
-Playlist::Playlist(string name){playlistName_ = name;}
+Playlist::Playlist(): playlistName_("Uninitialized"){
+    playlistID_ = currentPlaylistID++;
+}
+
+Playlist::Playlist(string name){
+    playlistName_ = name;
+    playlistID_ = currentPlaylistID++;
+}
 
 Playlist::~Playlist(){cout << "Playlist \"" << playlistName_ << "\" Deleted." << endl;}
 
