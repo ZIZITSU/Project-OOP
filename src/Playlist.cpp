@@ -18,7 +18,7 @@ Playlist::Playlist(const SongLibrary& library, string name): playlistName_(name)
 Playlist::~Playlist(){cout << "Playlist \"" << playlistName_ << "\" Deleted." << endl;}
 
 void Playlist::addSong(const Song& song){
-    Song* temp = library_->getSong(song.id());
+    const Song* temp = library_->getSong(song.id());
     songs_.push_back(temp);
 }
 
@@ -40,7 +40,7 @@ void Playlist::moveSong(const int moveFromIndex, const int moveToIndex){
         cout << "Error: Invalid Index.";
         return;
     }
-    Song* temp = songs_[moveFromIndex];
+    const Song* temp = songs_[moveFromIndex];
     songs_.erase(songs_.begin() + moveFromIndex);
     songs_.insert(songs_.begin() + moveToIndex, temp);
 }

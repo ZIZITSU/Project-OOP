@@ -16,10 +16,10 @@ class BasePlaylist{
 class Playlist: public BasePlaylist{
     private:
         string playlistName_;
-        vector<Song*> songs_;
+        vector<const Song*> songs_;
         int playlistID_;
         static int currentPlaylistID;
-        SongLibrary* library_;
+        const SongLibrary* library_;
     public:
         Playlist(const SongLibrary& library);
         Playlist(const SongLibrary& library, string name);
