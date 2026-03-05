@@ -1,0 +1,19 @@
+# build folders
+build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+
+# Qt / CMake generated
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.user
+
+# VS Code
+.vscode/
+
+# audio (optional - usually too big)
+data/audio/
