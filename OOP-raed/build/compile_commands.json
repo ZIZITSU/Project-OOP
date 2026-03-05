@@ -1,0 +1,50 @@
+[
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\main.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\main.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/main.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/main.cpp.obj"
+},
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\Persistence.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\Persistence.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/Persistence.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/Persistence.cpp.obj"
+},
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\Playlist.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\Playlist.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/Playlist.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/Playlist.cpp.obj"
+},
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\SongLibrary.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\SongLibrary.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/SongLibrary.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/SongLibrary.cpp.obj"
+},
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\Recommender.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\Recommender.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/Recommender.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/Recommender.cpp.obj"
+},
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\Song.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\Song.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/Song.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/Song.cpp.obj"
+},
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\Userprofile.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\Userprofile.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/Userprofile.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/Userprofile.cpp.obj"
+},
+{
+  "directory": "D:/VSCode/OOPproject/OOP-raed/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/PocketTrack.dir/includes_CXX.rsp -g -std=c++17 -Wall -Wextra -Wpedantic -o CMakeFiles\\PocketTrack.dir\\src\\Player.cpp.obj -c D:\\VSCode\\OOPproject\\OOP-raed\\Project-OOP\\src\\Player.cpp",
+  "file": "D:/VSCode/OOPproject/OOP-raed/Project-OOP/src/Player.cpp",
+  "output": "CMakeFiles/PocketTrack.dir/src/Player.cpp.obj"
+}
+]

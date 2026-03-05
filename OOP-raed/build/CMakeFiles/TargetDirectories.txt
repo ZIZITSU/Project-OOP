@@ -1,0 +1,3 @@
+D:/VSCode/OOPproject/OOP-raed/build/CMakeFiles/PocketTrack.dir
+D:/VSCode/OOPproject/OOP-raed/build/CMakeFiles/edit_cache.dir
+D:/VSCode/OOPproject/OOP-raed/build/CMakeFiles/rebuild_cache.dir
