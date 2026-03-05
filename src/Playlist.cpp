@@ -61,7 +61,31 @@ void Playlist::listAllPlaylistSongs() const{
     }
 }
 
-Playlist Playlist::operator + (const Playlist& playlist) const{}
-Playlist Playlist::operator + (const Song& song) const{}
-Playlist& Playlist::operator += (const Playlist& playlist){}
-Playlist& Playlist::operator += (const Song& song){}
+Playlist Playlist::operator + (const Playlist& playlist) const{
+    Playlist temp(*library_, "Merged Playlist: " + playlistName_ + " + " + playlist.playlistName_);
+    for(int i=0;i<this->getPlaylistSize();i++){
+        temp.songs_.push_back(songs_[i]);
+    }
+    for(int i=0;i<playlist.getPlaylistSize();i++){
+        temp.songs_.push_back(playlist.songs_[i]);
+    }
+    return temp;
+}
+
+Playlist Playlist::operator + (const Song& song) const{
+    Playlist temp(*library_, playlistName_ + "+");
+    temp.addSong(song);
+    return temp;
+}
+
+Playlist& Playlist::operator += (const Playlist& playlist){
+    for(int i=0;i<playlist.songs_.size();i++){
+        songs_.push_back(playlist.songs_[i]);
+    }
+    return *this;
+}
+
+Playlist& Playlist::operator += (const Song& song){
+    this->addSong(song);
+    return *this;
+}

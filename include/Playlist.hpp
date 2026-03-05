@@ -28,6 +28,7 @@ class Playlist: public BasePlaylist{
         string getPlaylistName() const{return playlistName_;}
         int getPlaylistID() const{return playlistID_;}
         const Song* getSongAtIndex(int index) const{return songs_[index];};
+        int getPlaylistSize() const{return songs_.size();}
         void setPlaylistName(string playlistName){playlistName_ = playlistName;}
 
         void addSong(const Song& song) override;
