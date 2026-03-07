@@ -10,11 +10,11 @@ class BasePlaylist{
         virtual void listAllPlaylistSongs() const = 0;
         virtual void addSong(const Song& song) = 0;
         virtual void removeSong(const Song& song) = 0;
-        ~BasePlaylist(){}
+        virtual ~BasePlaylist(){}
 };
 
 class Playlist: public BasePlaylist{
-    private:
+    protected:
         string playlistName_;
         vector<const Song*> songs_;
         int playlistID_;
@@ -23,7 +23,7 @@ class Playlist: public BasePlaylist{
     public:
         Playlist(const SongLibrary& library);
         Playlist(const SongLibrary& library, string name);
-        ~Playlist();
+        virtual ~Playlist();
 
         string getPlaylistName() const{return playlistName_;}
         int getPlaylistID() const{return playlistID_;}
@@ -32,7 +32,9 @@ class Playlist: public BasePlaylist{
         void setPlaylistName(string playlistName){playlistName_ = playlistName;}
 
         void addSong(const Song& song) override;
+        void addSong(const int songID);
         void removeSong(const Song& song) override;
+        void removeSong(const int songID);
         void listAllPlaylistSongs() const override;
 
         void moveSong(const int moveFromIndex, const int moveToIndex);
@@ -42,4 +44,15 @@ class Playlist: public BasePlaylist{
         Playlist operator + (const Song& song) const;
         Playlist& operator += (const Playlist& playlist);
         Playlist& operator += (const Song& song);
+};
+
+class FavoritePlaylist: public Playlist{
+    private:
+        vector<const Song*> favorites;
+    public:
+        FavoritePlaylist(const SongLibrary& library);
+        void addSong(const Song& song) override;
+        void addSong(const int songID);
+        void removeSong(const Song& song) override;
+        void removeSong(const int songID);
 };

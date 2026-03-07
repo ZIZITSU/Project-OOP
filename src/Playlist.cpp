@@ -4,6 +4,8 @@
 #include<iostream>
 using namespace std;
 
+//Playlist
+
 int Playlist::currentPlaylistID = 1;
 
 Playlist::Playlist(const SongLibrary& library): playlistName_("Uninitialized"), library_(&library) {
@@ -22,12 +24,22 @@ void Playlist::addSong(const Song& song){
     songs_.push_back(temp);
 }
 
+void Playlist::addSong(const int songID){
+    songs_.push_back(library_->getSong(songID));
+}
+
 void Playlist::removeSong(const Song& song){
     for(auto temp = songs_.begin(); temp != songs_.end(); ++temp){
         if((*temp)->id() == song.id()){
             songs_.erase(temp);
+            break;
         }
     }
+}
+
+void Playlist::removeSong(const int songID) {
+    const Song* temp = library_->getSong(songID);
+    removeSong(*temp);
 }
 
 void Playlist::moveSong(const int moveFromIndex, const int moveToIndex){
@@ -88,4 +100,38 @@ Playlist& Playlist::operator += (const Playlist& playlist){
 Playlist& Playlist::operator += (const Song& song){
     this->addSong(song);
     return *this;
+}
+
+
+
+
+
+
+
+//FavoritePlaylist
+
+FavoritePlaylist::FavoritePlaylist(const SongLibrary& library): Playlist(library, "Favourites") {}
+
+void FavoritePlaylist::addSong(const Song& song){
+    const Song* temp = library_->getSong(song.id());
+    favorites.push_back(temp);
+}
+
+void FavoritePlaylist::addSong(const int songID){
+    const Song* temp = library_->getSong(songID);
+    favorites.push_back(temp);
+}
+
+void FavoritePlaylist::removeSong(const Song& song){
+    for(auto it = favorites.begin(); it != favorites.end(); ++it){
+        if((*it)->id() == song.id()){
+            favorites.erase(it);
+            break;
+        }
+    }
+}
+
+void FavoritePlaylist::removeSong(const int songID){
+    const Song* temp = library_->getSong(songID);
+    removeSong(*temp);
 }
