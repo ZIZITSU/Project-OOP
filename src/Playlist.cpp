@@ -21,36 +21,43 @@ Playlist::~Playlist(){cout << "Playlist \"" << playlistName_ << "\" Deleted." <<
 
 void Playlist::addSong(const Song& song){
     const Song* temp = library_->getSong(song.id());
+    if(!temp) throw SongNotFoundException();
+    for(int i=0;i<songs_.size();i++){
+        if(songs_[i]->id() == song.id()) throw DuplicateSongExeption(song.title() + " already inlcuded.");
+    }
     songs_.push_back(temp);
 }
 
 void Playlist::addSong(const int songID){
-    songs_.push_back(library_->getSong(songID));
+    const Song* temp = library_->getSong(songID);
+    if(!temp) throw SongNotFoundException(to_string(songID) + " not found.");
+    addSong(*temp);
 }
 
 void Playlist::removeSong(const Song& song){
+    if(!library_->getSong(song.id())) throw SongNotFoundException();
     for(auto temp = songs_.begin(); temp != songs_.end(); ++temp){
         if((*temp)->id() == song.id()){
             songs_.erase(temp);
-            break;
+            return;
         }
     }
+    throw SongNotFoundException(song.title() + " not found in playlist.");
 }
 
-void Playlist::removeSong(const int songID) {
+void Playlist::removeSong(const int songID){
     const Song* temp = library_->getSong(songID);
+    if(!temp) throw SongNotFoundException();
     removeSong(*temp);
 }
 
 void Playlist::moveSong(const int moveFromIndex, const int moveToIndex){
     int playlistSize = songs_.size();
     if(moveFromIndex < 0 || moveFromIndex > playlistSize){
-        cout << "Error: Invalid Index.";
-        return;
+        throw InvalidIndexException(to_string(moveFromIndex) + " out of range.");
     }
     if(moveToIndex < 0 || moveToIndex > playlistSize){
-        cout << "Error: Invalid Index.";
-        return;
+        throw InvalidIndexException(to_string(moveToIndex) + " out of range.");
     }
     const Song* temp = songs_[moveFromIndex];
     songs_.erase(songs_.begin() + moveFromIndex);
@@ -66,6 +73,10 @@ int Playlist::getTotalPlaylistDuration() const{
 }
 
 void Playlist::listAllPlaylistSongs() const{
+    if(songs_.empty()){
+        cout << "Playlist is empty.";
+        return;
+    }
     for(int i=0;i<songs_.size();i++){
         const Song* song = songs_[i];
         cout << "\"" << song->title() << "\" by " << song->artist()
@@ -114,24 +125,32 @@ FavoritePlaylist::FavoritePlaylist(const SongLibrary& library): Playlist(library
 
 void FavoritePlaylist::addSong(const Song& song){
     const Song* temp = library_->getSong(song.id());
+    if(!temp) throw SongNotFoundException();
+    for(int i=0;i<songs_.size();i++){
+        if(songs_[i]->id() == song.id()) throw DuplicateSongExeption(song.title() + " already inlcuded.");
+    }
     favorites.push_back(temp);
 }
 
 void FavoritePlaylist::addSong(const int songID){
     const Song* temp = library_->getSong(songID);
-    favorites.push_back(temp);
+    if(!temp) throw SongNotFoundException();
+    addSong(*temp);
 }
 
 void FavoritePlaylist::removeSong(const Song& song){
+    if(!library_->getSong(song.id())) throw SongNotFoundException();
     for(auto it = favorites.begin(); it != favorites.end(); ++it){
         if((*it)->id() == song.id()){
             favorites.erase(it);
-            break;
+            return;
         }
     }
+    throw SongNotFoundException(song.title() + " not found in playlist.");
 }
 
 void FavoritePlaylist::removeSong(const int songID){
     const Song* temp = library_->getSong(songID);
+    if(!temp) throw SongNotFoundException();
     removeSong(*temp);
 }

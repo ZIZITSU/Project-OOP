@@ -56,3 +56,33 @@ class FavoritePlaylist: public Playlist{
         void removeSong(const Song& song) override;
         void removeSong(const int songID);
 };
+
+
+//Exceptions
+
+class PlaylistException{
+    protected:
+        string message_;
+    public:
+        PlaylistException(): message_("Playlist error.");
+        PlaylistException(const string message): message_(message) {}
+        string what() const{return message_;}
+};
+
+class InvalidIndexException: public PlaylistException{
+    public:
+        InvalidIndexException(): PlaylistException("Index out of range.") {}
+        InvalidIndexException(const string message): PlaylistException(message) {} 
+};
+
+class SongNotFoundException: public PlaylistException{
+    public:
+        SongNotFoundException(): PlaylistException("Song not found.") {}
+        SongNotFoundException(const string message): PlaylistException(message) {}
+};
+
+class DuplicateSongExeption: public PlaylistException{
+    public:
+        DuplicateSongExeption(): PlaylistException("Song already included.") {}
+        DuplicateSongExeption(const string message): PlaylistException(message) {}
+};
