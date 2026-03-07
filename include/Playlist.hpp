@@ -42,8 +42,11 @@ class Playlist: public BasePlaylist{
 
         Playlist operator + (const Playlist& playlist) const;
         Playlist operator + (const Song& song) const;
+        Playlist operator + (const int songID) const;
         Playlist& operator += (const Playlist& playlist);
         Playlist& operator += (const Song& song);
+        Playlist& operator += (const int songID);
+        Playlist& operator = (const Playlist& playlist);
 };
 
 class FavoritePlaylist: public Playlist{
@@ -64,7 +67,7 @@ class PlaylistException{
     protected:
         string message_;
     public:
-        PlaylistException(): message_("Playlist error.");
+        PlaylistException(): message_("Playlist error.") {}
         PlaylistException(const string message): message_(message) {}
         string what() const{return message_;}
 };

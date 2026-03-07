@@ -30,7 +30,7 @@ void Playlist::addSong(const Song& song){
 
 void Playlist::addSong(const int songID){
     const Song* temp = library_->getSong(songID);
-    if(!temp) throw SongNotFoundException(to_string(songID) + " not found.");
+    if(!temp) throw SongNotFoundException("Song " + to_string(songID) + " not found.");
     addSong(*temp);
 }
 
@@ -80,24 +80,30 @@ void Playlist::listAllPlaylistSongs() const{
     for(int i=0;i<songs_.size();i++){
         const Song* song = songs_[i];
         cout << "\"" << song->title() << "\" by " << song->artist()
-        << " ,Duration: " << song->duration() << endl;
+        << ", Duration: " << song->duration() << " secs" << endl;
     }
 }
 
 Playlist Playlist::operator + (const Playlist& playlist) const{
-    Playlist temp(*library_, "Merged Playlist: " + playlistName_ + " + " + playlist.playlistName_);
-    for(int i=0;i<this->getPlaylistSize();i++){
-        temp.songs_.push_back(songs_[i]);
-    }
-    for(int i=0;i<playlist.getPlaylistSize();i++){
-        temp.songs_.push_back(playlist.songs_[i]);
+    Playlist temp = *this;
+    temp.setPlaylistName("Merged: " + playlistName_ + " + " + playlist.playlistName_);
+    for(int i=0;i<playlist.songs_.size();i++){
+        temp.addSong(*playlist.songs_[i]);
     }
     return temp;
 }
 
 Playlist Playlist::operator + (const Song& song) const{
-    Playlist temp(*library_, playlistName_ + "+");
+    Playlist temp = *this;
+    temp.setPlaylistName(playlistName_  + "+");
     temp.addSong(song);
+    return temp;
+}
+
+Playlist Playlist::operator + (const int songID) const{
+    Playlist temp = *this;
+    temp.setPlaylistName(playlistName_  + "+");
+    temp.addSong(songID);
     return temp;
 }
 
@@ -113,8 +119,18 @@ Playlist& Playlist::operator += (const Song& song){
     return *this;
 }
 
+Playlist& Playlist::operator += (const int songID){
+    this->addSong(songID);
+    return *this;
+}
 
-
+Playlist& Playlist::operator=(const Playlist& playlist) {
+    if (this == &playlist) return *this;
+    playlistName_ = playlist.playlistName_;
+    songs_        = playlist.songs_;
+    library_      = playlist.library_;
+    return *this;
+}
 
 
 
