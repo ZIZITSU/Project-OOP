@@ -4,13 +4,13 @@
 #include<iostream>
 using namespace std;
 
-//Playlist
+//----Playlist----
 
-int Playlist::currentPlaylistID = 1;
+int Playlist::currentPlaylistID = 1; //Initializing static member
 
-Playlist::Playlist(const SongLibrary& library): playlistName_("Uninitialized"), library_(&library) {
+//Playlist cannot be created without any library
+Playlist::Playlist(const SongLibrary& library): playlistName_("Uninitialized"), library_(&library){
     playlistID_ = currentPlaylistID++;
-    
 }
 
 Playlist::Playlist(const SongLibrary& library, string name): playlistName_(name), library_(&library){
@@ -19,6 +19,7 @@ Playlist::Playlist(const SongLibrary& library, string name): playlistName_(name)
 
 Playlist::~Playlist(){cout << "Playlist \"" << playlistName_ << "\" Deleted." << endl;}
 
+//Add or remove song, can be done in two ways: through a reference, or through the songID.
 void Playlist::addSong(const Song& song){
     const Song* temp = library_->getSong(song.id());
     if(!temp) throw SongNotFoundException();
@@ -51,6 +52,7 @@ void Playlist::removeSong(const int songID){
     removeSong(*temp);
 }
 
+//Move the position of a song within the playlist
 void Playlist::moveSong(const int moveFromIndex, const int moveToIndex){
     int playlistSize = songs_.size();
     if(moveFromIndex < 0 || moveFromIndex > playlistSize){
@@ -84,6 +86,7 @@ void Playlist::listAllPlaylistSongs() const{
     }
 }
 
+// '+' operator adds a song/playlist and returns the playlist
 Playlist Playlist::operator + (const Playlist& playlist) const{
     Playlist temp = *this;
     temp.setPlaylistName("Merged: " + playlistName_ + " + " + playlist.playlistName_);
@@ -107,6 +110,7 @@ Playlist Playlist::operator + (const int songID) const{
     return temp;
 }
 
+// '+=' operator adds a song to the current playlist
 Playlist& Playlist::operator += (const Playlist& playlist){
     for(int i=0;i<playlist.songs_.size();i++){
         songs_.push_back(playlist.songs_[i]);
@@ -124,7 +128,8 @@ Playlist& Playlist::operator += (const int songID){
     return *this;
 }
 
-Playlist& Playlist::operator=(const Playlist& playlist) {
+//copies playlist
+Playlist& Playlist::operator = (const Playlist& playlist) {
     if (this == &playlist) return *this;
     playlistName_ = playlist.playlistName_;
     songs_        = playlist.songs_;
@@ -135,7 +140,9 @@ Playlist& Playlist::operator=(const Playlist& playlist) {
 
 
 
-//FavoritePlaylist
+
+
+//----FavoritePlaylist----
 
 FavoritePlaylist::FavoritePlaylist(const SongLibrary& library): Playlist(library, "Favourites") {}
 
